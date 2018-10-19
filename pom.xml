@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="ISO-8859-15" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.M4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	
+
+    <!-- Identification du projet -->
+    <groupId>com.agrica.socle.ppa</groupId>
+    <artifactId>ppa-spring-boot</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>POM Parent Agrica - Projets Spring Boot</name>
+
+    <organization>
+        <name>Agrica</name>
+        <url>https://www.groupagrica.com/</url>
+    </organization>
+
+    <inceptionYear>2018</inceptionYear>
+
+    <!-- pre-requis -->
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
+
+
+
+    <!--<ciManagement>-->
+    <!--<system>Jenkins</system>-->
+    <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
+    <!--</ciManagement>-->
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>${usine.url.bugtracker.jira}/PILPA</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:ssh://gitlab-dei:socle/ppa-spring-boot.git</connection>
+        <developerConnection>scm:git:git@gitlab-dei:socle/ppa-spring-boot.git</developerConnection>
+        <url>http://gitlab-dei/socle/ppa-spring-boot</url>
+        <tag>HEAD</tag>
+    </scm>
+
+	
+    <!-- A redefinir au besoin par les projets -->
+    <properties>
+        <!-- L'encoding des sources -->
+        <!--<source.encoding>UTF-8</source.encoding>-->
+        <source.encoding>UTF-8</source.encoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
+        <build.date>${maven.build.timestamp}</build.date>
+        <git.branch>${scmBranch}</git.branch>
+        <git.commit.sha1>${buildNumber}</git.commit.sha1>
+
+        <!-- Git Changelog configuration -->
+        <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
+        <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
+        <git-changelog-fromRef />
+        <git-changelog-toRef>HEAD</git-changelog-toRef>
+        <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
+
+        <!-- La version de maven -->
+        <maven.version>3.5.0</maven.version>
+        <!-- Le niveau de compatibilite des sources du projet -->
+        <compile.source>10</compile.source>
+        <!-- Le niveau de compatibilite des binaires du projet -->
+        <compile.target>10</compile.target>
+        <!-- Les options a passer a la commande forkee de maven pour les tests -->
+        <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
+
+        <!-- Sonar -->
+        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+
+        <!-- ================================= -->
+        <!-- Usine                             -->
+        <!-- ================================= -->
+        <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
+        <!--<build.date>${maven.build.timestamp}</build.date>-->
+
+
+        <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
+        <usine.url.jira>http://jira.agrica.loc</usine.url.jira>
+        <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
+        <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
+        <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
+        <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
+        <usine.url.sonar>http://sonar</usine.url.sonar>
+
+        <!-- ================================= -->
+        <!-- Parametrage buildnumber           -->
+        <!-- ================================= -->
+        <buildnumber.revisionOnScmFailure>0</buildnumber.revisionOnScmFailure>
+        <buildnumber.doCheck>false</buildnumber.doCheck>
+        <buildnumber.doUpdate>false</buildnumber.doUpdate>
+
+
+        <!-- ================================= -->
+        <!-- Les versions de Plugins Maven -->
+        <!-- ================================= -->
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+
+        <!-- Sonar -->
+        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
+        <!-- Changelog -->
+        <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
+       <ppa-assembly-descriptor.version>0.2.5</ppa-assembly-descriptor.version>
+    </properties>
+
+
+    <build>
+        <pluginManagement>
+            <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
+            <plugins>
+                <!-- ************************* -->
+                <!-- Tools                     -->
+                <!-- ************************ -->
+                <!-- Release -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                    <configuration>
+                        <!-- During release:perform, enable the "release" profile -->
+                        <releaseProfiles>release</releaseProfiles>
+                        <!--<pushChanges>false</pushChanges>-->
+                        <!--<goals>sonar:sonar</goals>-->
+                    </configuration>
+                </plugin>
+                <!-- Deploy -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <!-- Javadoc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <!-- Install & Deploy -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <!-- Version -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven-plugin.version}</version>
+                </plugin>
+                <!-- Build Helper -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+                <!-- Assembly -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                    <configuration>
+                        <appendAssemblyId>true</appendAssemblyId>
+                        <tarLongFileMode>gnu</tarLongFileMode>
+                    </configuration>
+                </plugin>
+                <!-- Iterator -->
+                <plugin>
+                    <groupId>com.soebes.maven.plugins</groupId>
+                    <artifactId>iterator-maven-plugin</artifactId>
+                    <version>${iterator-maven-plugin.version}</version>
+                </plugin>
+
+                <!-- ***************************** -->
+                <!-- Plugins pour Release Notes    -->
+                <!-- ***************************** -->
+                <plugin>
+                    <groupId>se.bjurr.gitchangelog</groupId>
+                    <artifactId>git-changelog-maven-plugin</artifactId>
+                    <version>${git-changelog-maven-plugin.version}</version>
+                            <configuration>
+                                <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
+                                <!-- JIRA -->
+                                <jiraUsername>${jira.username}</jiraUsername>
+                                <jiraPassword>${jira.password}</jiraPassword>
+                                <jiraServer>${usine.url.jira}</jiraServer>
+                                <fromRef>${git-changelog-fromRef}</fromRef>
+                                <toRef>${git-changelog-toRef}</toRef>
+                                <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
+                                <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
+                                <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
+                                <!--<settingsFile>changelog.json</settingsFile>-->
+                                <!--<templateFile>changelog.mustache</templateFile>-->
+                                <!-- A file on filesystem //-->
+                                <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
+                                <templateContent>
+                                    <![CDATA[
+# Git Changelog Maven plugin changelog
+
+Changelog of Git Changelog Maven plugin.
+
+{{#tags}}
+## {{name}}
+ {{#issues}}
+  {{#hasIssue}}
+   {{#hasLink}}
+### {{name}} [{{issue}}]({{link}}) {{title}}
+   {{/hasLink}}
+   {{^hasLink}}
+### {{name}} {{issue}} {{title}}
+   {{/hasLink}}
+  {{/hasIssue}}
+  {{^hasIssue}}
+### {{name}}
+  {{/hasIssue}}
+
+  {{#commits}}
+**{{{messageTitle}}}**
+
+{{#messageBodyItems}}
+ * {{.}}
+{{/messageBodyItems}}
+
+[{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
+
+  {{/commits}}
+
+ {{/issues}}
+{{/tags}}
+
+]]>
+                                </templateContent>
+
+                            </configuration>
+                </plugin>
+
+                <!-- ***************************** -->
+                <!-- Plugins pour Sonar            -->
+                <!-- ***************************** -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+
+                <!-- Plugins pour generer le changelog -->
+                <plugin>
+                    <groupId>com.github.danielflower.mavenplugins</groupId>
+                    <artifactId>gitlog-maven-plugin</artifactId>
+                    <version>${gitlog-maven-plugin.version}</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+        <plugins>
+
+            <!-- Buildnumber -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${buildnumber-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <revisionOnScmFailure>${buildnumber.revisionOnScmFailure}</revisionOnScmFailure>
+                    <doCheck>${buildnumber.doCheck}</doCheck>
+                    <doUpdate>${buildnumber.doUpdate}</doUpdate>
+                    <shortRevisionLength>8</shortRevisionLength>
+                </configuration>
+            </plugin>
+
+            <!-- TimeStamp -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>changelog-start</name>
+                            <pattern>yyyy-MM-dd 00:00:00</pattern>
+                            <timeZone>GMT</timeZone>
+                            <locale>en_US</locale>
+                            <unit>month</unit>
+                            <offset>-2</offset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<version>${build-helper-maven-plugin.version}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>timestamp-property</id>-->
+                        <!--<goals>-->
+                            <!--<goal>timestamp-property</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<name>build.time</name>-->
+                            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
+                            <!--<locale>en_US</locale>-->
+                            <!--<timeZone>EST</timeZone>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+            <!-- Build Number -->
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>buildnumber-maven-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>validate</phase>-->
+            <!--<goals>-->
+            <!--<goal>create</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+
+    </build>
+
+    <profiles>
+
+        <!-- Sonar -->
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
+                <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
+                <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
+            </properties>
+            <build>
+                <defaultGoal>sonar:sonar</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>${sonar-maven-plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        
+
+        <profile>
+            <id>release-notes-git</id>
+            <activation>
+                <file>
+                    <exists>.git</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- ************************* -->
+                    <!-- Changelog                -->
+                    <!-- ************************ -->
+                    <!-- Run:  mvn generate-sources     -->
+                    <!-- https://github.com/tomasbjerre/git-changelog-maven-plugin/tree/master/git-changelog-maven-plugin-example -->
+                    <plugin>
+                        <groupId>se.bjurr.gitchangelog</groupId>
+                        <artifactId>git-changelog-maven-plugin</artifactId>
+                        <version>${git-changelog-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>GenerateGitChangelog</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>git-changelog</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Assembly htdocs-->
+					
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.agrica.socle.ppa</groupId>
+                                <artifactId>ppa-assembly-descriptor</artifactId>
+                                <version>${ppa-assembly-descriptor.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <tarLongFileMode>gnu</tarLongFileMode>
+                        </configuration>
+                        <executions>
+                            <!-- Release Notes -->
+                            <execution>
+                                <id>make-assembly-release-notes</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptorRefs>
+                                        <descriptorRef>assembly-release-notes</descriptorRef>
+                                    </descriptorRefs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+ 
+
+    </profiles>
+</project>
+	
