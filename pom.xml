@@ -28,6 +28,20 @@
 
     <inceptionYear>2018</inceptionYear>
 
+    <!-- Elements pour le deploiement dans les repositories Agrica -->
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Release Repository</name>
+            <url>${dist.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshots Repository</name>
+            <url>${dist.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <!-- pre-requis -->
     <prerequisites>
         <maven>${maven.version}</maven>
@@ -52,9 +66,22 @@
         <tag>ppa-spring-boot-0.0.1</tag>
     </scm>
 
+    <profiles>
+        <profile>
+            <id>socle</id>
+            <properties>
+                <dist.snapshots.url>http://nexus/repository/maven-socle-releases/</dist.snapshots.url>
+                <dist.releases.url>http://nexus/repository/maven-socle-releases/</dist.releases.url>
+            </properties>
+        </profile>
+    </profiles>
+
 
     <!-- A redefinir au besoin par les projets -->
     <properties>
+        <!-- Les URLs pour le deploiement des artifacts -->
+        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
         <!-- L'encoding des sources -->
         <!--<source.encoding>UTF-8</source.encoding>-->
         <source.encoding>UTF-8</source.encoding>
