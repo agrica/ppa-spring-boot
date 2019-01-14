@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-    
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.M4</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 
-	
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.M4</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
+
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
@@ -49,10 +49,10 @@
         <connection>scm:git:ssh://gitlab-dei:socle/ppa-spring-boot.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa-spring-boot.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa-spring-boot</url>
-        <tag>HEAD</tag>
+        <tag>ppa-spring-boot-0.0.1</tag>
     </scm>
 
-	
+
     <!-- A redefinir au besoin par les projets -->
     <properties>
         <!-- L'encoding des sources -->
@@ -123,7 +123,7 @@
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
         <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
-       <ppa-assembly-descriptor.version>0.2.5</ppa-assembly-descriptor.version>
+        <ppa-assembly-descriptor.version>0.2.5</ppa-assembly-descriptor.version>
     </properties>
 
 
@@ -215,23 +215,23 @@
                     <groupId>se.bjurr.gitchangelog</groupId>
                     <artifactId>git-changelog-maven-plugin</artifactId>
                     <version>${git-changelog-maven-plugin.version}</version>
-                            <configuration>
-                                <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
-                                <!-- JIRA -->
-                                <jiraUsername>${jira.username}</jiraUsername>
-                                <jiraPassword>${jira.password}</jiraPassword>
-                                <jiraServer>${usine.url.jira}</jiraServer>
-                                <fromRef>${git-changelog-fromRef}</fromRef>
-                                <toRef>${git-changelog-toRef}</toRef>
-                                <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
-                                <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
-                                <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
-                                <!--<settingsFile>changelog.json</settingsFile>-->
-                                <!--<templateFile>changelog.mustache</templateFile>-->
-                                <!-- A file on filesystem //-->
-                                <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
-                                <templateContent>
-                                    <![CDATA[
+                    <configuration>
+                        <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
+                        <!-- JIRA -->
+                        <jiraUsername>${jira.username}</jiraUsername>
+                        <jiraPassword>${jira.password}</jiraPassword>
+                        <jiraServer>${usine.url.jira}</jiraServer>
+                        <fromRef>${git-changelog-fromRef}</fromRef>
+                        <toRef>${git-changelog-toRef}</toRef>
+                        <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
+                        <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
+                        <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
+                        <!--<settingsFile>changelog.json</settingsFile>-->
+                        <!--<templateFile>changelog.mustache</templateFile>-->
+                        <!-- A file on filesystem //-->
+                        <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
+                        <templateContent>
+                            <![CDATA[
 # Git Changelog Maven plugin changelog
 
 Changelog of Git Changelog Maven plugin.
@@ -266,9 +266,9 @@ Changelog of Git Changelog Maven plugin.
 {{/tags}}
 
 ]]>
-                                </templateContent>
+                        </templateContent>
 
-                            </configuration>
+                    </configuration>
                 </plugin>
 
                 <!-- ***************************** -->
@@ -334,23 +334,23 @@ Changelog of Git Changelog Maven plugin.
                 </executions>
             </plugin>
             <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
-                <!--<version>${build-helper-maven-plugin.version}</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>timestamp-property</id>-->
-                        <!--<goals>-->
-                            <!--<goal>timestamp-property</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<name>build.time</name>-->
-                            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
-                            <!--<locale>en_US</locale>-->
-                            <!--<timeZone>EST</timeZone>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+            <!--<version>${build-helper-maven-plugin.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>timestamp-property</id>-->
+            <!--<goals>-->
+            <!--<goal>timestamp-property</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<name>build.time</name>-->
+            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
+            <!--<locale>en_US</locale>-->
+            <!--<timeZone>EST</timeZone>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
             <!-- Build Number -->
@@ -393,7 +393,7 @@ Changelog of Git Changelog Maven plugin.
         </profile>
 
 
-        
+
 
         <profile>
             <id>release-notes-git</id>
@@ -424,7 +424,7 @@ Changelog of Git Changelog Maven plugin.
                         </executions>
                     </plugin>
                     <!-- Assembly htdocs-->
-					
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
@@ -459,8 +459,7 @@ Changelog of Git Changelog Maven plugin.
                 </plugins>
             </build>
         </profile>
- 
+
 
     </profiles>
 </project>
-	
