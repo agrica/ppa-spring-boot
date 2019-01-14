@@ -113,6 +113,7 @@
         <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
 
