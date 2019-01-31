@@ -1,16 +1,20 @@
 # ppa-spring-boot
 
-Projet PPA pour les projet springBoot
+Projet PPA pour les projets Spring Boot
 
 ## pom.xml
 
 Il contient :
 - **dependencyManagement** : les versions des dépendances
 - **distributionManagement** : les repos release et snapshot
-- **issueManagement** : l'emplacement du JIRA
+- **issueManagement** : l'emplacement du JIRA   
+IMPORTANT : **redéfinir _<jira-project>_ dans les applications Spring Boot**
 - pour les définitions des builds de configurations, rechercher :
     - **make-it-assembly-config** : pour les configuration de l'environnement (eg. BDD)
-    - **make-it-assembly-resources** : pour les configuration applicatives par environnement (eg. niveau de LOG)
+    - **make-it-assembly-resources** : pour les configuration applicatives par environnement (eg. niveau de LOG)  
+    IMPORTANT : pour chacune des configurations, l'applications Spring Boot devra respecter l'arborescence prévue et les  
+    redéfinir avec **[itemsWithProperties](https://khmarbaise.github.io/iterator-maven-plugin/iterator-mojo.html)** qui précise les environnements sur lesquels l'application sera déployée
+- **A COMPLETER...**
 ---
      Notes : 
      
@@ -23,10 +27,14 @@ Il contient :
      grâce à la configuration <ignoreMissingDescriptor>true</ignoreMissingDescriptor>  
 ---     
 
-## propositions
 
+## remarques / propositions :
+- plus de **${serverName}** => les confs sont agnostiques de la machine
 - associer la génération des configurations à un profil et ne plus mettre 
     ```
     <ignoreMissingDescriptor>true</ignoreMissingDescriptor>
     ``` 
-- 
+- kezako si plusieurs projets JIRA ? **eg. HDF / PILPA**
+    
+- le profil **todir** pour déployer les artefact dans des répertoires ne fonctionne plus... 
+ 

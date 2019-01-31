@@ -55,7 +55,7 @@
 
     <issueManagement>
         <system>JIRA</system>
-        <url>${usine.url.bugtracker.jira}/PILPA</url>
+        <url>${usine.url.bugtracker.jira}/${jira-project}</url>
     </issueManagement>
 
     <scm>
@@ -294,117 +294,18 @@ Changelog of Git Changelog Maven plugin.
                             <goal>iterator</goal>
                         </goals>
                         <configuration>
+
+                            <!-- TODO : example -  to be overriden in Spring Boot application -->
                             <itemsWithProperties>
-                                <itemWithProptery>
-                                    <name>dev</name>
-                                    <properties>
-                                        <serverEnv>dev</serverEnv>
-                                        <serverName>dsapunxweb01</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>dev</name>
-                                    <properties>
-                                        <serverEnv>dev</serverEnv>
-                                        <serverName>dev2</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
                                 <itemWithProptery>
                                     <name>local</name>
                                     <properties>
                                         <serverEnv>local</serverEnv>
-                                        <serverName>local</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>integ</name>
-                                    <properties>
-                                        <serverEnv>integ</serverEnv>
-                                        <serverName>integ1</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>integ</name>
-                                    <properties>
-                                        <serverEnv>integ</serverEnv>
-                                        <serverName>integ2</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>qa</name>
-                                    <properties>
-                                        <serverEnv>qa</serverEnv>
-                                        <serverName>arras</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>qa</name>
-                                    <properties>
-                                        <serverEnv>qa</serverEnv>
-                                        <serverName>qsapunxweb01</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>qa</name>
-                                    <properties>
-                                        <serverEnv>qa</serverEnv>
-                                        <serverName>qa2</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>rec</name>
-                                    <properties>
-                                        <serverEnv>rec</serverEnv>
-                                        <serverName>angouleme</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>rec</name>
-                                    <properties>
-                                        <serverEnv>rec</serverEnv>
-                                        <serverName>rsapunxweb01</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>prod</name>
-                                    <properties>
-                                        <serverEnv>prod</serverEnv>
-                                        <serverName>psapunxweb01</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>prod</name>
-                                    <properties>
-                                        <serverEnv>prod</serverEnv>
-                                        <serverName>annemasse</serverName>
-                                        <packaging.assembly.app.format>${zip.assembly.format}
-                                        </packaging.assembly.app.format>
+                                        <!-- format a priori inutile : deja dans le fichier assembly -->
+                                        <packaging.assembly.app.format>${resources.assembly.format}</packaging.assembly.app.format>
                                     </properties>
                                 </itemWithProptery>
                             </itemsWithProperties>
-
 
                             <pluginExecutors>
                                 <pluginExecutor>
@@ -419,13 +320,13 @@ Changelog of Git Changelog Maven plugin.
                                         <formats>
                                             <format>zip</format>
                                         </formats>
-                                        <finalName>${project.artifactId}-${project.version}-conf</finalName>
-                                        <appendAssemblyId>true</appendAssemblyId>
+                                        <finalName>${project.artifactId}-${project.version}-app-resources-${serverEnv}</finalName>
+                                        <appendAssemblyId>false</appendAssemblyId>
                                         <tarLongFileMode>posix</tarLongFileMode>
                                         <ignoreMissingDescriptor>true</ignoreMissingDescriptor>
                                         <descriptors>
                                             <descriptor>
-                                                ${project.basedir}/src/main/configuration/assembly/assembly.xml
+                                                ${project.basedir}/src/main/configuration/assembly/assembly-resources.xml
                                             </descriptor>
                                         </descriptors>
                                         <!-- to ignore missing file : https://issues.apache.org/jira/browse/MSHARED-514 -->
@@ -435,9 +336,6 @@ Changelog of Git Changelog Maven plugin.
                                             </filter>
                                             <filter>
                                                 ${project.basedir}/src/main/configuration/environment/app-${serverEnv}.properties
-                                            </filter>
-                                            <filter>
-                                                ${project.basedir}/src/main/configuration/environment/app-${serverEnv}-${serverName}.properties
                                             </filter>
                                         </filters>
                                     </configuration>
@@ -456,27 +354,17 @@ Changelog of Git Changelog Maven plugin.
                             <goal>iterator</goal>
                         </goals>
                         <configuration>
+                            <!-- TODO : example - to be overriden in Spring Boot application -->
                             <itemsWithProperties>
                                 <itemWithProptery>
                                     <name>local</name>
                                     <properties>
                                         <serverEnv>local</serverEnv>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>integ</name>
-                                    <properties>
-                                        <serverEnv>integ</serverEnv>
-                                    </properties>
-                                </itemWithProptery>
-                                <itemWithProptery>
-                                    <name>prod</name>
-                                    <properties>
-                                        <serverEnv>template</serverEnv>
+                                        <!-- format a priori inutile : deja dans le fichier assembly -->
+                                        <packaging.assembly.app.format>${config.assembly.format}</packaging.assembly.app.format>
                                     </properties>
                                 </itemWithProptery>
                             </itemsWithProperties>
-
 
                             <pluginExecutors>
                                 <pluginExecutor>
@@ -491,8 +379,7 @@ Changelog of Git Changelog Maven plugin.
                                         <formats>
                                             <format>zip</format>
                                         </formats>
-                                        <appendAssemblyId>false</appendAssemblyId>
-                                        <finalName>${project.artifactId}-${project.version}-${serverEnv}</finalName>
+                                        <finalName>${project.artifactId}-${project.version}-app-config</finalName>
                                         <appendAssemblyId>true</appendAssemblyId>
                                         <tarLongFileMode>posix</tarLongFileMode>
                                         <ignoreMissingDescriptor>true</ignoreMissingDescriptor>
@@ -583,7 +470,7 @@ Changelog of Git Changelog Maven plugin.
         <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
         <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
         <usine.url.sonar>http://sonar</usine.url.sonar>
-
+        <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project><!-- TODO : more than one JIRA project ? -->
         <!-- ================================= -->
         <!-- Parametrage buildnumber           -->
         <!-- ================================= -->
@@ -610,8 +497,9 @@ Changelog of Git Changelog Maven plugin.
         <!-- version iterator-maven-plugin -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <!-- configuration de packaging pour assembly-->
-        <zip.assembly.format>zip</zip.assembly.format>
-
+        <!-- TODO : override in Spring Boot application if necessary -->
+        <resources.assembly.format>zip</resources.assembly.format>
+        <config.assembly.format>zip</config.assembly.format>
     </properties>
 
     <profiles>
@@ -709,6 +597,12 @@ Changelog of Git Changelog Maven plugin.
             </build>
         </profile>
 
+        <profile>
+            <id>todir</id>
+            <properties>
+                <packaging.assembly.app.format>dir</packaging.assembly.app.format>
+            </properties>
+        </profile>
 
     </profiles>
 </project>
