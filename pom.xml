@@ -326,7 +326,7 @@ Changelog of Git Changelog Maven plugin.
                                         <ignoreMissingDescriptor>true</ignoreMissingDescriptor>
                                         <descriptors>
                                             <descriptor>
-                                                ${project.basedir}/src/main/configuration/assembly/assembly-resources.xml
+                                                configuration/assembly/assembly-resources.xml
                                             </descriptor>
                                         </descriptors>
                                         <!-- to ignore missing file : https://issues.apache.org/jira/browse/MSHARED-514 -->
@@ -491,7 +491,7 @@ Changelog of Git Changelog Maven plugin.
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
         <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
-        <ppa-assembly-descriptor.version>0.2.5</ppa-assembly-descriptor.version>
+        <ppa-assembly-descriptor.version>0.2.6-M16</ppa-assembly-descriptor.version>
 
         <!-- rajout en version 0.0.9 -->
         <!-- version iterator-maven-plugin -->
