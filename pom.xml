@@ -14,7 +14,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
-    <version>0.0.11-M3-SNAPSHOT</version>
+    <version>0.0.11-M4-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
