@@ -217,11 +217,11 @@ Changelog of Git Changelog Maven plugin.
                 <!-- ***************************** -->
                 <!-- Plugins pour Sonar            -->
                 <!-- ***************************** -->
-                <plugin>
+               <!-- <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar-maven-plugin.version}</version>
-                </plugin>
+                </plugin>-->
 
                 <!-- Plugins pour generer le changelog -->
                 <plugin>
