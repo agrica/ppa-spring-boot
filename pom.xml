@@ -328,6 +328,7 @@ Changelog of Git Changelog Maven plugin.
         <!-- Sonar -->
         <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
         <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+        <maven.surefire.plugin.version>3.0.0-M3</maven.surefire.plugin.version>
 
         <!-- ================================= -->
         <!-- Usine                             -->
@@ -384,7 +385,7 @@ Changelog of Git Changelog Maven plugin.
                     com/agrica/hdf/model/**/*,
                     om/agrica/hdf/**/model/**,
                     om/agrica/**/model/**,
-                    om/agrica/**/models/**,
+                    om/agrica/**/models/**
                 </sonar.coverage.exclusions>
             </properties>
             <build>
@@ -394,6 +395,18 @@ Changelog of Git Changelog Maven plugin.
                         <groupId>org.sonarsource.scanner.maven</groupId>
                         <artifactId>sonar-maven-plugin</artifactId>
                         <version>${sonar-maven-plugin.version}</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven.surefire.plugin.version}</version>
+                        <configuration>
+                            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                            <excludes>
+                                <exclude>**/model/*.java</exclude>
+                                <exclude>**/model/**/*.java</exclude>
+                            </excludes>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
