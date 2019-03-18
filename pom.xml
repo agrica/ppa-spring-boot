@@ -86,10 +86,7 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven-release-plugin.version}</version>
                     <configuration>
-                        <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
-                        <!--<pushChanges>false</pushChanges>-->
-                        <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
                 <!-- Deploy -->
@@ -506,9 +503,12 @@ Changelog of Git Changelog Maven plugin.
         <profile>
             <id>sonar</id>
             <properties>
-                <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
-                <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
-                <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
+                <sonar.coverage.exclusions>
+                    com/agrica/hdf/model/**/*,
+                    om/agrica/hdf/**/model/**,
+                    om/agrica/**/model/**,
+                    om/agrica/**/models/**,
+                </sonar.coverage.exclusions>
             </properties>
             <build>
                 <defaultGoal>sonar:sonar</defaultGoal>
