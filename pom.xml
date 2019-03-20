@@ -95,9 +95,9 @@
         <!-- La version de maven -->
         <maven.version>3.5.0</maven.version>
         <!-- Le niveau de compatibilite des sources du projet -->
-        <compile.source>10</compile.source>
+        <compile.source>11</compile.source>
         <!-- Le niveau de compatibilite des binaires du projet -->
-        <compile.target>10</compile.target>
+        <compile.target>11</compile.target>
         <!-- Les options a passer a la commande forkee de maven pour les tests -->
         <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
 
