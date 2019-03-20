@@ -65,6 +65,97 @@
     </scm>
 
 
+    <properties>
+
+        <java.version>11</java.version>
+
+        <!-- Les URLs pour le deploiement des artifacts -->
+        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
+        <!-- L'encoding des sources -->
+        <!--<source.encoding>UTF-8</source.encoding>-->
+        <source.encoding>UTF-8</source.encoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
+        <build.date>${maven.build.timestamp}</build.date>
+        <git.branch>${scmBranch}</git.branch>
+        <git.commit.sha1>${buildNumber}</git.commit.sha1>
+
+        <!-- Git Changelog configuration -->
+        <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
+        <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
+        <git-changelog-fromRef />
+        <git-changelog-toRef>HEAD</git-changelog-toRef>
+        <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
+
+        <!-- La version de maven -->
+        <maven.version>3.5.0</maven.version>
+        <!-- Le niveau de compatibilite des sources du projet -->
+        <compile.source>10</compile.source>
+        <!-- Le niveau de compatibilite des binaires du projet -->
+        <compile.target>10</compile.target>
+        <!-- Les options a passer a la commande forkee de maven pour les tests -->
+        <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
+
+        <!-- Sonar -->
+        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+
+        <!-- ================================= -->
+        <!-- Usine                             -->
+        <!-- ================================= -->
+        <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
+        <!--<build.date>${maven.build.timestamp}</build.date>-->
+
+
+        <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
+        <usine.url.jira>http://jira.agrica.loc</usine.url.jira>
+        <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
+        <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
+        <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
+        <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
+        <usine.url.sonar>http://sonar</usine.url.sonar>
+        <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project><!-- TODO : more than one JIRA project ? -->
+        <!-- ================================= -->
+        <!-- Parametrage buildnumber           -->
+        <!-- ================================= -->
+        <buildnumber.revisionOnScmFailure>0</buildnumber.revisionOnScmFailure>
+        <buildnumber.doCheck>false</buildnumber.doCheck>
+        <buildnumber.doUpdate>false</buildnumber.doUpdate>
+
+
+        <!-- ================================= -->
+        <!-- Les versions de Plugins Maven -->
+        <!-- ================================= -->
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+
+        <!-- Sonar -->
+        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
+        <!-- Changelog -->
+        <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
+        <ppa-assembly-descriptor.version>0.2.6-M16</ppa-assembly-descriptor.version>
+
+        <!-- rajout en version 0.0.9 -->
+        <!-- version iterator-maven-plugin -->
+        <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
+        <!-- configuration de packaging pour assembly-->
+        <!-- TODO : override in Spring Boot application if necessary -->
+        <resources.assembly.format>zip</resources.assembly.format>
+        <config.assembly.format>zip</config.assembly.format>
+
+        <!-- ================================= -->
+        <!-- Les versions de Plugins Maven     -->
+        <!-- ================================= -->
+        <jaxb.maven-plugins-dependencies.version>2.2.11</jaxb.maven-plugins-dependencies.version>
+
+    </properties>
     <!-- A redefinir au besoin par les projets -->
     <build>
 
@@ -161,6 +252,28 @@
                     <groupId>se.bjurr.gitchangelog</groupId>
                     <artifactId>git-changelog-maven-plugin</artifactId>
                     <version>${git-changelog-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>javax.xml.bind</groupId>
+                            <artifactId>jaxb-api</artifactId>
+                            <version>${jaxb.maven-plugins-dependencies.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.sun.xml.bind</groupId>
+                            <artifactId>jaxb-core</artifactId>
+                            <version>${jaxb.maven-plugins-dependencies.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.sun.xml.bind</groupId>
+                            <artifactId>jaxb-impl</artifactId>
+                            <version>${jaxb.maven-plugins-dependencies.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.activation</groupId>
+                            <artifactId>javax.activation-api</artifactId>
+                            <version>1.2.0</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
                         <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
                         <!-- JIRA -->
@@ -415,91 +528,6 @@ Changelog of Git Changelog Maven plugin.
         </dependencies>
     </dependencyManagement>
 
-    <properties>
-
-        <java.version>11</java.version>
-
-        <!-- Les URLs pour le deploiement des artifacts -->
-        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
-        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
-        <!-- L'encoding des sources -->
-        <!--<source.encoding>UTF-8</source.encoding>-->
-        <source.encoding>UTF-8</source.encoding>
-        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
-        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
-        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
-        <build.date>${maven.build.timestamp}</build.date>
-        <git.branch>${scmBranch}</git.branch>
-        <git.commit.sha1>${buildNumber}</git.commit.sha1>
-
-        <!-- Git Changelog configuration -->
-        <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
-        <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef />
-        <git-changelog-toRef>HEAD</git-changelog-toRef>
-        <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
-
-        <!-- La version de maven -->
-        <maven.version>3.5.0</maven.version>
-        <!-- Le niveau de compatibilite des sources du projet -->
-        <compile.source>10</compile.source>
-        <!-- Le niveau de compatibilite des binaires du projet -->
-        <compile.target>10</compile.target>
-        <!-- Les options a passer a la commande forkee de maven pour les tests -->
-        <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
-
-        <!-- Sonar -->
-        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
-        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
-
-        <!-- ================================= -->
-        <!-- Usine                             -->
-        <!-- ================================= -->
-        <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
-        <!--<build.date>${maven.build.timestamp}</build.date>-->
-
-
-        <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
-        <usine.url.jira>http://jira.agrica.loc</usine.url.jira>
-        <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
-        <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
-        <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
-        <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
-        <usine.url.sonar>http://sonar</usine.url.sonar>
-        <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project><!-- TODO : more than one JIRA project ? -->
-        <!-- ================================= -->
-        <!-- Parametrage buildnumber           -->
-        <!-- ================================= -->
-        <buildnumber.revisionOnScmFailure>0</buildnumber.revisionOnScmFailure>
-        <buildnumber.doCheck>false</buildnumber.doCheck>
-        <buildnumber.doUpdate>false</buildnumber.doUpdate>
-
-
-        <!-- ================================= -->
-        <!-- Les versions de Plugins Maven -->
-        <!-- ================================= -->
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
-        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
-
-        <!-- Sonar -->
-        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
-        <!-- Changelog -->
-        <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
-        <ppa-assembly-descriptor.version>0.2.6-M16</ppa-assembly-descriptor.version>
-
-        <!-- rajout en version 0.0.9 -->
-        <!-- version iterator-maven-plugin -->
-        <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
-        <!-- configuration de packaging pour assembly-->
-        <!-- TODO : override in Spring Boot application if necessary -->
-        <resources.assembly.format>zip</resources.assembly.format>
-        <config.assembly.format>zip</config.assembly.format>
-    </properties>
 
     <profiles>
         <!-- Sonar -->
@@ -548,27 +576,6 @@ Changelog of Git Changelog Maven plugin.
                     <plugin>
                         <groupId>se.bjurr.gitchangelog</groupId>
                         <artifactId>git-changelog-maven-plugin</artifactId>
-                        <dependencies>
-                            <dependency>
-                                <groupId>javax.xml.bind</groupId>
-                                <artifactId>jaxb-api</artifactId>
-                                <version>2.3.1</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-core</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.sun.xml.bind</groupId>
-                                <artifactId>jaxb-impl</artifactId>
-                                <version>2.2.11</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>javax.activation</groupId>
-                                <artifactId>activation</artifactId>
-                            </dependency>
-                        </dependencies>
                         <version>${git-changelog-maven-plugin.version}</version>
                         <executions>
                             <execution>
