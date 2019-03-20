@@ -489,7 +489,7 @@ Changelog of Git Changelog Maven plugin.
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
         <ppa-assembly-descriptor.version>0.2.6-M16</ppa-assembly-descriptor.version>
 
         <!-- rajout en version 0.0.9 -->
