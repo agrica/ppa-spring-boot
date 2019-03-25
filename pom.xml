@@ -420,7 +420,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.2.201409121644</version>
+                <version>0.8.2</version>
                 <configuration>
                     <append>true</append>
                     <excludes>**/model/**/*,**/model/*,**/models/**/*</excludes>
@@ -455,23 +455,6 @@
 
 
     <profiles>
-        <!--&lt;!&ndash; Sonar &ndash;&gt;
-        <profile>
-            <id>sonar</id>
-            <properties>
-                <sonar.exclusions>**/model/**/*</sonar.exclusions>
-            </properties>
-            <build>
-                <defaultGoal>sonar:sonar</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonarsource.scanner.maven</groupId>
-                        <artifactId>sonar-maven-plugin</artifactId>
-                        <version>${sonar-maven-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>-->
 
         <profile>
             <id>socle</id>
