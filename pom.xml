@@ -58,8 +58,8 @@
 
     <properties>
 
-        <compiler.source>1.8</compiler.source>
-        <compiler.target>1.8</compiler.target>
+        <compiler.source>11</compiler.source>
+        <compiler.target>11</compiler.target>
         <compiler.debug>false</compiler.debug>
         <encodage.version>UTF-8</encodage.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
