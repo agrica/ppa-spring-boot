@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -10,13 +8,12 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
-
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
-    <version>0.0.12-M11-SNAPSHOT</version>
-
+    <version>0.0.12-F1-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
 
@@ -46,12 +43,6 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-
-    <!--<ciManagement>-->
-    <!--<system>Jenkins</system>-->
-    <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
-    <!--</ciManagement>-->
-
     <issueManagement>
         <system>JIRA</system>
         <url>${usine.url.bugtracker.jira}/${jira-project}</url>
@@ -66,6 +57,12 @@
 
 
     <properties>
+
+        <compiler.source>1.8</compiler.source>
+        <compiler.target>1.8</compiler.target>
+        <compiler.debug>false</compiler.debug>
+        <encodage.version>UTF-8</encodage.version>
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
 
         <java.version>11</java.version>
 
@@ -348,7 +345,31 @@ Changelog of Git Changelog Maven plugin.
 
             </plugins>
         </pluginManagement>
+
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <debug>${compiler.debug}</debug>
+                    <source>${compiler.source}</source>
+                    <target>${compiler.target}</target>
+                    <encoding>${encodage.version}</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
+                        <compilerArg>-Amapstruct.unmappedTargetPolicy=WARN</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
 
             <!-- Buildnumber -->
             <plugin>
@@ -412,9 +433,7 @@ Changelog of Git Changelog Maven plugin.
         <profile>
             <id>sonar</id>
             <properties>
-                <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
-                <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
-                <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
+                <sonar.exclusions>**/model/**/*</sonar.exclusions>
             </properties>
             <build>
                 <defaultGoal>sonar:sonar</defaultGoal>
@@ -427,7 +446,6 @@ Changelog of Git Changelog Maven plugin.
                 </plugins>
             </build>
         </profile>
-
 
         <profile>
             <id>socle</id>
@@ -446,11 +464,6 @@ Changelog of Git Changelog Maven plugin.
             </activation>
             <build>
                 <plugins>
-                    <!-- ************************* -->
-                    <!-- Changelog                -->
-                    <!-- ************************ -->
-                    <!-- Run:  mvn generate-sources     -->
-                    <!-- https://github.com/tomasbjerre/git-changelog-maven-plugin/tree/master/git-changelog-maven-plugin-example -->
                     <plugin>
                         <groupId>se.bjurr.gitchangelog</groupId>
                         <artifactId>git-changelog-maven-plugin</artifactId>
