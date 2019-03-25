@@ -189,11 +189,11 @@
                     <version>${maven-resources-plugin.version}</version>
                 </plugin>
                 <!-- Javadoc -->
-                <plugin>
+               <!-- <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
-                </plugin>
+                </plugin>-->
                 <!-- Install & Deploy -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
