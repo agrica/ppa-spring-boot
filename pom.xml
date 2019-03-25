@@ -174,10 +174,7 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven-release-plugin.version}</version>
                     <configuration>
-                        <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
-                        <!--<pushChanges>false</pushChanges>-->
-                        <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
                 <!-- Deploy -->
@@ -288,40 +285,40 @@
                         <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
                         <templateContent>
                             <![CDATA[
-# Git Changelog Maven plugin changelog
+                                    # Git Changelog Maven plugin changelog
 
-Changelog of Git Changelog Maven plugin.
+                                    Changelog of Git Changelog Maven plugin.
 
-{{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
+                                    {{#tags}}
+                                    ## {{name}}
+                                     {{#issues}}
+                                      {{#hasIssue}}
+                                       {{#hasLink}}
+                                    ### {{name}} [{{issue}}]({{link}}) {{title}}
+                                       {{/hasLink}}
+                                       {{^hasLink}}
+                                    ### {{name}} {{issue}} {{title}}
+                                       {{/hasLink}}
+                                      {{/hasIssue}}
+                                      {{^hasIssue}}
+                                    ### {{name}}
+                                      {{/hasIssue}}
 
-  {{#commits}}
-**{{{messageTitle}}}**
+                                      {{#commits}}
+                                    **{{{messageTitle}}}**
 
-{{#messageBodyItems}}
- * {{.}}
-{{/messageBodyItems}}
+                                    {{#messageBodyItems}}
+                                     * {{.}}
+                                    {{/messageBodyItems}}
 
-[{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
+                                    [{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
 
-  {{/commits}}
+                                      {{/commits}}
 
- {{/issues}}
-{{/tags}}
+                                     {{/issues}}
+                                    {{/tags}}
 
-]]>
+                                    ]]>
                         </templateContent>
 
                     </configuration>
@@ -414,6 +411,35 @@ Changelog of Git Changelog Maven plugin.
                 </executions>
             </plugin>
 
+            <!-- jacoco plugin for code coverage -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.2.201409121644</version>
+                <configuration>
+                    <append>true</append>
+                    <excludes>**/model/**/*,**/model/*,**/models/**/*</excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -429,7 +455,7 @@ Changelog of Git Changelog Maven plugin.
 
 
     <profiles>
-        <!-- Sonar -->
+        <!--&lt;!&ndash; Sonar &ndash;&gt;
         <profile>
             <id>sonar</id>
             <properties>
@@ -445,7 +471,7 @@ Changelog of Git Changelog Maven plugin.
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile>-->
 
         <profile>
             <id>socle</id>
