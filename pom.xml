@@ -11,7 +11,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
-    <version>0.0.12-F2-SNAPSHOT</version>
+    <version>0.0.12-F2</version>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
@@ -52,7 +52,7 @@
         <connection>scm:git:ssh://gitlab-dei:socle/ppa-spring-boot.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa-spring-boot.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa-spring-boot</url>
-        <tag>HEAD</tag>
+        <tag>ppa-spring-boot-0.0.12-F2</tag>
     </scm>
 
 
