@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -10,13 +8,12 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
-
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
     <version>0.0.12-M11-SNAPSHOT</version>
-
     <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
 
@@ -46,12 +43,6 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-
-    <!--<ciManagement>-->
-    <!--<system>Jenkins</system>-->
-    <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
-    <!--</ciManagement>-->
-
     <issueManagement>
         <system>JIRA</system>
         <url>${usine.url.bugtracker.jira}/${jira-project}</url>
@@ -66,6 +57,7 @@
 
 
     <properties>
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
 
         <java.version>11</java.version>
 
@@ -73,7 +65,6 @@
         <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
         <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
         <!-- L'encoding des sources -->
-        <!--<source.encoding>UTF-8</source.encoding>-->
         <source.encoding>UTF-8</source.encoding>
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
@@ -177,10 +168,7 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven-release-plugin.version}</version>
                     <configuration>
-                        <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
-                        <!--<pushChanges>false</pushChanges>-->
-                        <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
                 <!-- Deploy -->
@@ -193,12 +181,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
-                </plugin>
-                <!-- Javadoc -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${maven-javadoc-plugin.version}</version>
                 </plugin>
                 <!-- Install & Deploy -->
                 <plugin>
@@ -291,40 +273,40 @@
                         <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
                         <templateContent>
                             <![CDATA[
-# Git Changelog Maven plugin changelog
+                                    # Git Changelog Maven plugin changelog
 
-Changelog of Git Changelog Maven plugin.
+                                    Changelog of Git Changelog Maven plugin.
 
-{{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
+                                    {{#tags}}
+                                    ## {{name}}
+                                     {{#issues}}
+                                      {{#hasIssue}}
+                                       {{#hasLink}}
+                                    ### {{name}} [{{issue}}]({{link}}) {{title}}
+                                       {{/hasLink}}
+                                       {{^hasLink}}
+                                    ### {{name}} {{issue}} {{title}}
+                                       {{/hasLink}}
+                                      {{/hasIssue}}
+                                      {{^hasIssue}}
+                                    ### {{name}}
+                                      {{/hasIssue}}
 
-  {{#commits}}
-**{{{messageTitle}}}**
+                                      {{#commits}}
+                                    **{{{messageTitle}}}**
 
-{{#messageBodyItems}}
- * {{.}}
-{{/messageBodyItems}}
+                                    {{#messageBodyItems}}
+                                     * {{.}}
+                                    {{/messageBodyItems}}
 
-[{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
+                                    [{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
 
-  {{/commits}}
+                                      {{/commits}}
 
- {{/issues}}
-{{/tags}}
+                                     {{/issues}}
+                                    {{/tags}}
 
-]]>
+                                    ]]>
                         </templateContent>
 
                     </configuration>
@@ -348,7 +330,29 @@ Changelog of Git Changelog Maven plugin.
 
             </plugins>
         </pluginManagement>
+
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${compile.source}</source>
+                    <target>${compile.target}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
+                        <compilerArg>-Amapstruct.unmappedTargetPolicy=WARN</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
 
             <!-- Buildnumber -->
             <plugin>
@@ -393,6 +397,45 @@ Changelog of Git Changelog Maven plugin.
                 </executions>
             </plugin>
 
+            <!-- jacoco plugin for code coverage -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <configuration>
+                    <append>true</append>
+                    <excludes>**/model/**/*,**/model/*,**/models/**/*</excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -408,26 +451,6 @@ Changelog of Git Changelog Maven plugin.
 
 
     <profiles>
-        <!-- Sonar -->
-        <profile>
-            <id>sonar</id>
-            <properties>
-                <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
-                <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
-                <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
-            </properties>
-            <build>
-                <defaultGoal>sonar:sonar</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonarsource.scanner.maven</groupId>
-                        <artifactId>sonar-maven-plugin</artifactId>
-                        <version>${sonar-maven-plugin.version}</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
 
         <profile>
             <id>socle</id>
@@ -444,13 +467,11 @@ Changelog of Git Changelog Maven plugin.
                     <exists>.git</exists>
                 </file>
             </activation>
+            <properties>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+            </properties>
             <build>
                 <plugins>
-                    <!-- ************************* -->
-                    <!-- Changelog                -->
-                    <!-- ************************ -->
-                    <!-- Run:  mvn generate-sources     -->
-                    <!-- https://github.com/tomasbjerre/git-changelog-maven-plugin/tree/master/git-changelog-maven-plugin-example -->
                     <plugin>
                         <groupId>se.bjurr.gitchangelog</groupId>
                         <artifactId>git-changelog-maven-plugin</artifactId>
