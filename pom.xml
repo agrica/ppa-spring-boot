@@ -104,8 +104,8 @@
 
 
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
-        <usine.url.jira>http://jira.agrica.loc</usine.url.jira>
-        <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
+        <usine.url.jira>https://jira.agrica.loc</usine.url.jira>
+        <usine.url.bugtracker.jira>https://jira.agrica.loc/browse</usine.url.bugtracker.jira>
         <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
         <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
         <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
