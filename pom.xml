@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
-    <version>0.0.12-M13-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modelVersion>4.0.0</modelVersion>
+    <version>0.1.0-SNAPSHOT</version>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
 
@@ -57,20 +58,25 @@
 
 
     <properties>
-        <mapstruct.version>1.3.0.Final</mapstruct.version>
+        <!-- La version de maven -->
+        <maven.version>3.5.0</maven.version>
 
-        <java.version>11</java.version>
-
-        <!-- Les URLs pour le deploiement des artifacts -->
-        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
-        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
         <!-- L'encoding des sources -->
         <source.encoding>UTF-8</source.encoding>
-        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.reporting.outputEncoding>${source.encoding}</project.reporting.outputEncoding>
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
-        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- Java Version pour le niveau de compatibilite des binaires du projet -->
+        <java.version>11</java.version>
+        <compile.source>${java.version}</compile.source>
+        <compile.target>${java.version}</compile.target>
+
+        <!-- Assembly packaging configuration -->
+        <packaging.assembly.app.format>zip</packaging.assembly.app.format>
+        <!-- PPA Assembly packaging configuration -->
+        <ppa-assembly-descriptor.version>0.2.10</ppa-assembly-descriptor.version>
+
+        <!-- Maven configuration -->
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
         <git.branch>${scmBranch}</git.branch>
@@ -79,38 +85,36 @@
         <!-- Git Changelog configuration -->
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef />
+        <git-changelog-fromRef/>
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
 
-        <!-- La version de maven -->
-        <maven.version>3.5.0</maven.version>
-        <!-- Le niveau de compatibilite des sources du projet -->
-        <compile.source>11</compile.source>
-        <!-- Le niveau de compatibilite des binaires du projet -->
-        <compile.target>11</compile.target>
+        <!-- Build Configuration-->
+        <jacoco-maven-plugin.excludes>**/model/**/*,**/model/*,**/models/**/*</jacoco-maven-plugin.excludes>
         <!-- Les options a passer a la commande forkee de maven pour les tests -->
         <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
-
-        <!-- Sonar -->
-        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
-        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
 
         <!-- ================================= -->
         <!-- Usine                             -->
         <!-- ================================= -->
         <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
         <!--<build.date>${maven.build.timestamp}</build.date>-->
-
+        <!-- Les URLs pour le deploiement des artifacts -->
+        <dist.snapshots.url>http://nexus.agrica.loc/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus.agrica.loc/repository/maven-releases/</dist.releases.url>
 
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
         <usine.url.jira>https://jira.agrica.loc</usine.url.jira>
         <usine.url.bugtracker.jira>https://jira.agrica.loc/browse</usine.url.bugtracker.jira>
-        <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
-        <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
+        <usine.url.ci.jenkins>http://jenkins.agrica.loc</usine.url.ci.jenkins>
+
+        <!-- Sonar -->
         <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
         <usine.url.sonar>http://sonar</usine.url.sonar>
         <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project><!-- TODO : more than one JIRA project ? -->
+        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+
         <!-- ================================= -->
         <!-- Parametrage buildnumber           -->
         <!-- ================================= -->
@@ -118,43 +122,44 @@
         <buildnumber.doCheck>false</buildnumber.doCheck>
         <buildnumber.doUpdate>false</buildnumber.doUpdate>
 
-
         <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
-        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
-
-        <!-- Sonar -->
+        <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version> <!-- 3.0.0 -->
+        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version> <!-- 2.18.1 -->
+        <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version> <!-- 0.8.2 -->
+        <!-- Usine -->
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
         <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
-        <ppa-assembly-descriptor.version>0.2.6-M16</ppa-assembly-descriptor.version>
-
-        <!-- rajout en version 0.0.9 -->
-        <!-- version iterator-maven-plugin -->
+        <!-- Packaging -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
-        <!-- configuration de packaging pour assembly-->
-        <!-- TODO : override in Spring Boot application if necessary -->
-        <resources.assembly.format>zip</resources.assembly.format>
-        <config.assembly.format>zip</config.assembly.format>
 
         <!-- ================================= -->
-        <!-- Les versions de Plugins Maven     -->
+        <!-- Compatibilité JDK11               -->
         <!-- ================================= -->
         <jaxb.maven-plugins-dependencies.version>2.2.11</jaxb.maven-plugins-dependencies.version>
+        <javax.activation-api.version>1.2.0</javax.activation-api.version>
+
+        <!-- ================================= -->
+        <!-- Les versions Librairies projet    -->
+        <!-- ================================= -->
+        <!-- Helpers -->
+        <mapstruct.version>1.3.0.Final</mapstruct.version>
+        <!-- Swagger -->
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version> <!-- 2.9.0 -->
+        <swagger-annotations.version>1.5.18</swagger-annotations.version>
+        <!-- Database -->
+        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
 
     </properties>
-    <!-- A redefinir au besoin par les projets -->
-    <build>
 
-        <resources>
-            <resource>
-                <directory>/src/main/configuration</directory>
-            </resource>
-        </resources>
+    <build>
 
         <pluginManagement>
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
@@ -253,7 +258,7 @@
                         <dependency>
                             <groupId>javax.activation</groupId>
                             <artifactId>javax.activation-api</artifactId>
-                            <version>1.2.0</version>
+                            <version>${javax.activation-api.version}</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -328,6 +333,54 @@
                     <version>${gitlog-maven-plugin.version}</version>
                 </plugin>
 
+                <!-- ***************************** -->
+                <!-- Spring Boot                   -->
+                <!-- ***************************** -->
+                <!-- Suppression des properties du Jar -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <!-- Suppresion des properties du JAR  déployer-->
+                            <exclude>**/application*.properties</exclude>
+                            <exclude>**/logback*.xml</exclude>
+                            <!-- YAML ne sont pas authorisé -->
+                            <exclude>**/*.yml</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+
+                <!-- Spring boot re-packaging -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <!-- Build Info for actuator -->
+                        <execution>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                            <configuration>
+                                <additionalProperties>
+                                    <description>${project.description}</description>
+                                    <java.source>${maven.compiler.source}</java.source>
+                                    <java.target>${maven.compiler.target}</java.target>
+                                </additionalProperties>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <configuration>
+                                <classifier>exec</classifier>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -336,7 +389,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${compile.source}</source>
                     <target>${compile.target}</target>
@@ -401,15 +454,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>${jacoco-maven-plugin.version}</version>
                 <configuration>
                     <append>true</append>
-                    <excludes>**/model/**/*,**/model/*,**/models/**/*</excludes>
+                    <excludes>${jacoco-maven-plugin.excludes}</excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -430,11 +483,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
+
 
         </plugins>
     </build>
@@ -444,7 +498,7 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>2.9.0</version>
+                <version>${springfox-swagger2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -522,7 +576,7 @@
             </build>
         </profile>
 
-       <!-- Npm Install -->
+        <!-- Npm Install -->
         <profile>
             <id>yarn-install</id>
             <activation>
@@ -577,7 +631,6 @@
                 </plugins>
             </build>
         </profile>
-
 
 
         <profile>
