@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0-RC1</version>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
 
@@ -53,7 +52,7 @@
         <connection>scm:git:ssh://gitlab-dei:socle/ppa-spring-boot.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa-spring-boot.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa-spring-boot</url>
-        <tag>HEAD</tag>
+        <tag>ppa-spring-boot-0.1.0-RC1</tag>
     </scm>
 
 
@@ -85,7 +84,7 @@
         <!-- Git Changelog configuration -->
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef/>
+        <git-changelog-fromRef />
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
 
