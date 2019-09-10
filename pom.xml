@@ -134,6 +134,7 @@
         <!-- Usine -->
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+        <depgraph-maven-plugin.version>3.3.0</depgraph-maven-plugin.version>
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
         <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
@@ -333,6 +334,14 @@
                     <version>${gitlog-maven-plugin.version}</version>
                 </plugin>
 
+                <!-- mvn depgraph:graph -DshowVersions -DshowGroupIds -DshowDuplicates -DshowConflicts -->
+                <plugin>
+                    <groupId>com.github.ferstl</groupId>
+                    <artifactId>depgraph-maven-plugin</artifactId>
+                    <version>${depgraph-maven-plugin.version}</version>
+                    <configuration>
+                    </configuration>
+                </plugin>
                 <!-- ***************************** -->
                 <!-- Spring Boot                   -->
                 <!-- ***************************** -->
