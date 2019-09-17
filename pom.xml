@@ -141,7 +141,7 @@
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
 
         <!-- ================================= -->
-        <!-- Compatibilité JDK11               -->
+        <!-- Compatibilit JDK11               -->
         <!-- ================================= -->
         <jaxb.maven-plugins-dependencies.version>2.2.11</jaxb.maven-plugins-dependencies.version>
         <javax.activation-api.version>1.2.0</javax.activation-api.version>
@@ -350,10 +350,10 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <configuration>
                         <excludes>
-                            <!-- Suppresion des properties du JAR  déployer-->
+                            <!-- Suppresion des properties du JAR  dployer-->
                             <exclude>**/application*.properties</exclude>
                             <exclude>**/logback*.xml</exclude>
-                            <!-- YAML ne sont pas authorisé -->
+                            <!-- YAML ne sont pas authoris -->
                             <exclude>**/*.yml</exclude>
                         </excludes>
                     </configuration>
@@ -372,8 +372,6 @@
                             <configuration>
                                 <additionalProperties>
                                     <description>${project.description}</description>
-                                    <java.source>${maven.compiler.source}</java.source>
-                                    <java.target>${maven.compiler.target}</java.target>
                                 </additionalProperties>
                             </configuration>
                         </execution>
