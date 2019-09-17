@@ -13,7 +13,7 @@
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.1</version>
+    <version>0.1.2-SNAPSHOT</version>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
 
@@ -52,7 +52,7 @@
         <connection>scm:git:ssh://gitlab-dei:socle/ppa-spring-boot.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa-spring-boot.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa-spring-boot</url>
-        <tag>ppa-spring-boot-0.1.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
 
