@@ -139,7 +139,8 @@
         <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
         <!-- Packaging -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
-
+        <exec-maven-plugin.version.version>1.6.0</exec-maven-plugin.version.version>
+        
         <!-- ================================= -->
         <!-- Compatibilit JDK11               -->
         <!-- ================================= -->
