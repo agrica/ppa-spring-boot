@@ -373,6 +373,8 @@
                             <configuration>
                                 <additionalProperties>
                                     <description>${project.description}</description>
+                                    <git.commit.sha1>${git.commit.sha1}</git.commit.sha1>
+                                    <git.branch>${git.branch}</git.branch>
                                 </additionalProperties>
                             </configuration>
                         </execution>
