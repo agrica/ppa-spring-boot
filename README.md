@@ -1,4 +1,4 @@
-ppa-spring-boot [![Build Status](http://jenkins.agrica.loc/buildStatus/icon?job=socle/ci-SOCLE-PPA-spring-boot-master)](http://jenkins.agrica.loc/job/ditw/job/socle/job/ci-SOCLE-PPA-spring-boot-master/)
+ppa-spring-boot [![Build Status](http://jenkins.agrica.loc/buildStatus/icon?job=socle/ci-SOCLE-PPA-spring-boot-master)](http://jenkins.agrica.loc/job/socle/job/ci-SOCLE-PPA-spring-boot-master/)
 ================= 
 
 Projet PPA pour les projets Spring Boot
