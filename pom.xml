@@ -144,8 +144,9 @@
         <!-- ================================= -->
         <!-- Compatibilit JDK11               -->
         <!-- ================================= -->
-        <jaxb.maven-plugins-dependencies.version>2.2.11</jaxb.maven-plugins-dependencies.version>
-        <javax.activation-api.version>1.2.0</javax.activation-api.version>
+        <jaxws-api.maven-plugins-dependencies.version>2.3.1</jaxws-api.maven-plugins-dependencies.version>
+<!--        <jaxb.maven-plugins-dependencies.version>2.2.11</jaxb.maven-plugins-dependencies.version>-->
+<!--        <javax.activation-api.version>1.2.0</javax.activation-api.version>-->
 
         <!-- ================================= -->
         <!-- Les versions Librairies projet    -->
@@ -295,24 +296,9 @@ Changelog of Git Changelog Maven plugin.
                     </configuration>
                     <dependencies>
                         <dependency>
-                            <groupId>javax.xml.bind</groupId>
-                            <artifactId>jaxb-api</artifactId>
-                            <version>${jaxb.maven-plugins-dependencies.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.sun.xml.bind</groupId>
-                            <artifactId>jaxb-core</artifactId>
-                            <version>${jaxb.maven-plugins-dependencies.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.sun.xml.bind</groupId>
-                            <artifactId>jaxb-impl</artifactId>
-                            <version>${jaxb.maven-plugins-dependencies.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>javax.activation</groupId>
-                            <artifactId>javax.activation-api</artifactId>
-                            <version>${javax.activation-api.version}</version>
+                            <groupId>javax.xml.ws</groupId>
+                            <artifactId>jaxws-api</artifactId>
+                            <version>${jaxws-api.maven-plugins-dependencies.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
