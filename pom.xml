@@ -335,20 +335,12 @@ Changelog of Git Changelog Maven plugin.
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <configuration>
-                        <includes>
-                            <!-- Java classesy-->
-                            <include>**/*.class</include>
-                            <!-- SQL for flyway-->
-                            <include>**/*.sql</include>
-                        </includes>
                         <excludes>
                             <!-- Suppresion des properties du JAR  dployer-->
                             <exclude>**/application*.properties</exclude>
                             <exclude>**/logback*.xml</exclude>
                             <!-- YAML ne sont pas authoris -->
                             <exclude>**/*.yml</exclude>
-                            <!-- All -->
-                            <exclude>**/*.*</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
