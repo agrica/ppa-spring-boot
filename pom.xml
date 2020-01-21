@@ -345,6 +345,8 @@ Changelog of Git Changelog Maven plugin.
                             <exclude>**/*.*</exclude>
                         </excludes>
                         <includes>
+                            <!-- Java classesy-->
+                            <include>**/*.class</include>
                             <!-- SQL for flyway-->
                             <include>**/*.sql</include>
                         </includes>
