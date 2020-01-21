@@ -341,7 +341,13 @@ Changelog of Git Changelog Maven plugin.
                             <exclude>**/logback*.xml</exclude>
                             <!-- YAML ne sont pas authoris -->
                             <exclude>**/*.yml</exclude>
+                            <!-- All -->
+                            <exclude>**/*.*</exclude>
                         </excludes>
+                        <includes>
+                            <!-- SQL for flyway-->
+                            <include>**/*.sql</include>
+                        </includes>
                     </configuration>
                 </plugin>
 
