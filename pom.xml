@@ -163,6 +163,16 @@
 
     <build>
 
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*.*</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        
         <pluginManagement>
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
             <plugins>
