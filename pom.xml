@@ -71,7 +71,7 @@
         <compile.target>${java.version}</compile.target>
 
         <!-- Assembly packaging configuration -->
-        <packaging.assembly.app.format>zip</packaging.assembly.app.format>
+        <packaging.assembly.app.format>tar.gz</packaging.assembly.app.format>
         <!-- PPA Assembly packaging configuration -->
         <ppa-assembly-descriptor.version>0.2.10</ppa-assembly-descriptor.version>
 
