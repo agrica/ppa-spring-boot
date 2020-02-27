@@ -143,6 +143,8 @@
         <swagger-annotations.version>1.5.18</swagger-annotations.version>
         <!-- Database -->
         <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+        <!-- gitflow-maven-plugin -->
+        <gitflow-maven-plugin.version>1.14.0</gitflow-maven-plugin.version>
     </properties>
     <build>
         <pluginManagement>
@@ -362,6 +364,14 @@
                 <configuration>
                     <skip>true</skip>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>${gitflow-maven-plugin.version}</version>
+                <configuration>
+                    <versionDigitToIncrement>1</versionDigitToIncrement>
+		</configuration>
             </plugin>
         </plugins>
     </build>
