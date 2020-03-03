@@ -27,6 +27,14 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <name>Vincent Dupain</name>
+        </developer>
+        <developer>
+            <name>Jérôme Morille</name>
+        </developer>
+    </developers>    
     <inceptionYear>2019</inceptionYear>
     <distributionManagement>
         <snapshotRepository>
