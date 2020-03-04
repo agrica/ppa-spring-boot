@@ -385,11 +385,13 @@
     </build>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger2.version}</version>
-            </dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-dependencies</artifactId>
+		    <version>Greenwich.RELEASE</version>
+		    <type>pom</type>
+		    <scope>import</scope>
+		</dependency>
         </dependencies>
     </dependencyManagement>
     <profiles>
