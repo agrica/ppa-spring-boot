@@ -385,13 +385,21 @@
     </build>
     <dependencyManagement>
         <dependencies>
-		<dependency>
+            <dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-dependencies</artifactId>
 		    <version>Greenwich.SR5</version>
 		    <type>pom</type>
 		    <scope>import</scope>
-		</dependency>
+            </dependency>
+            <dependency>
+                <groupId>com.agrica.socle.springboot</groupId>
+                <artifactId>socle-springboot-dependencies</artifactId>
+                <version>${socle-springboot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+		
         </dependencies>
     </dependencyManagement>
     <profiles>
