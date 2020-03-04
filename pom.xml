@@ -115,6 +115,10 @@
         <buildnumber.doCheck>false</buildnumber.doCheck>
         <buildnumber.doUpdate>false</buildnumber.doUpdate>
         <!-- ================================= -->
+        <!-- Socle Spring boobnumber           -->
+        <!-- ================================= -->
+         <socle-springboot.version>0.0.2-M5</socle-springboot.version>
+        <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
