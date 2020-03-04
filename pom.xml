@@ -72,8 +72,6 @@
         <compile.target>${java.version}</compile.target>
         <!-- Assembly packaging configuration -->
         <packaging.assembly.app.format>zip</packaging.assembly.app.format>
-        <!-- PPA Assembly packaging configuration -->
-        <ppa-assembly-descriptor.version>0.2.10</ppa-assembly-descriptor.version>
         <!-- Maven configuration -->
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
@@ -115,7 +113,7 @@
         <buildnumber.doCheck>false</buildnumber.doCheck>
         <buildnumber.doUpdate>false</buildnumber.doUpdate>
         <!-- ================================= -->
-        <!-- Socle Spring boobnumber           -->
+        <!-- Socle Spring Boot                 -->
         <!-- ================================= -->
 <!--        <socle-springboot.version>0.0.2-M5</socle-springboot.version>-->
         <spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
@@ -150,6 +148,8 @@
         <!-- ================================= -->
         <!-- Les versions Librairies projet    -->
         <!-- ================================= -->
+        <!-- PPA Assembly packaging configuration -->
+        <ppa-assembly-descriptor.version>0.2.10</ppa-assembly-descriptor.version>
         <!-- Database -->
 <!--        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>-->
     </properties>
