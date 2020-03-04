@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
 <project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.2.RELEASE</version>
-        <relativePath />
+        <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
     <!-- Identification du projet -->
@@ -32,9 +32,9 @@
             <name>Vincent Dupain</name>
         </developer>
         <developer>
-            <name>JÃ©rÃŽme Morille</name>
+            <name>Jérôme Morille</name>
         </developer>
-    </developers>    
+    </developers>
     <inceptionYear>2019</inceptionYear>
     <distributionManagement>
         <snapshotRepository>
@@ -46,7 +46,7 @@
             <url>${dist.releases.url}</url>
         </repository>
     </distributionManagement>
-	
+
     <!-- pre-requis -->
     <prerequisites>
         <maven>${maven.version}</maven>
@@ -82,7 +82,7 @@
         <!-- Git Changelog configuration -->
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef />
+        <git-changelog-fromRef/>
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
         <!-- Build Configuration-->
@@ -117,7 +117,8 @@
         <!-- ================================= -->
         <!-- Socle Spring boobnumber           -->
         <!-- ================================= -->
-         <socle-springboot.version>0.0.2-M5</socle-springboot.version>
+<!--        <socle-springboot.version>0.0.2-M5</socle-springboot.version>-->
+        <spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
         <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
@@ -125,7 +126,7 @@
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
         <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
@@ -280,8 +281,8 @@
                             <configuration>
                                 <additionalProperties>
                                     <description>${project.description}</description>
-                                     <git.commit.sha1>${git.commit.sha1}</git.commit.sha1>
-                                    <git.branch>${git.branch}</git.branch>					
+                                    <git.commit.sha1>${git.commit.sha1}</git.commit.sha1>
+                                    <git.branch>${git.branch}</git.branch>
                                 </additionalProperties>
                             </configuration>
                         </execution>
@@ -383,27 +384,26 @@
                 <version>${gitflow-maven-plugin.version}</version>
                 <configuration>
                     <versionDigitToIncrement>1</versionDigitToIncrement>
-		</configuration>
+                </configuration>
             </plugin>
         </plugins>
     </build>
     <dependencyManagement>
         <dependencies>
             <dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-dependencies</artifactId>
-		    <version>Greenwich.SR5</version>
-		    <type>pom</type>
-		    <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.agrica.socle.springboot</groupId>
-                <artifactId>socle-springboot-dependencies</artifactId>
-                <version>${socle-springboot.version}</version>
-                <scope>import</scope>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
-		
+<!--            <dependency>-->
+<!--                <groupId>com.agrica.socle.springboot</groupId>-->
+<!--                <artifactId>socle-springboot-dependencies</artifactId>-->
+<!--                <version>${socle-springboot.version}</version>-->
+<!--                <scope>import</scope>-->
+<!--                <type>pom</type>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
     <profiles>
@@ -422,16 +422,16 @@
                     <name>ossrh-release</name>
                 </property>
             </activation>
-		<distributionManagement>
-			<snapshotRepository>
-				<id>ossrh</id>
-				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			</snapshotRepository>
-			<repository>
-				<id>ossrh</id>
-				<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-			</repository>
-		</distributionManagement>		
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
             <build>
                 <plugins>
                     <!-- To release to Maven central -->
