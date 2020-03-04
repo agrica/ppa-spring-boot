@@ -1,6 +1,7 @@
 # ppa-spring-boot [![Build Status](https://travis-ci.com/agrica/ppa-spring-boot.svg?branch=master)](https://travis-ci.com/agrica/ppa-spring-boot)
 
 Travis CI: https://travis-ci.com/agrica/ppa-spring-boot
+Repo Mondial: https://repo1.maven.org/maven2/io/github/agrica/ppa-spring-boot/
 
 ## Releasing du PPA
  * Créer une branche **prepare-release** depuis la branche master. Cette branche est juste une branche temporaire de préparation à la release
