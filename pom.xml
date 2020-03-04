@@ -125,11 +125,11 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
-        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <depgraph-maven-plugin.version>3.3.0</depgraph-maven-plugin.version>
         <!-- Changelog -->
@@ -140,6 +140,8 @@
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <!-- OSS RH -->
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+        <!-- gitflow-maven-plugin -->
+        <gitflow-maven-plugin.version>1.14.0</gitflow-maven-plugin.version>
         <!-- ================================= -->
         <!-- Compatibilit JDK11               -->
         <!-- ================================= -->
@@ -148,16 +150,8 @@
         <!-- ================================= -->
         <!-- Les versions Librairies projet    -->
         <!-- ================================= -->
-        <!-- Helpers -->
-        <mapstruct.version>1.3.0.Final</mapstruct.version>
-        <!-- Swagger -->
-        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <!-- 2.9.0 -->
-        <swagger-annotations.version>1.5.18</swagger-annotations.version>
         <!-- Database -->
-        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
-        <!-- gitflow-maven-plugin -->
-        <gitflow-maven-plugin.version>1.14.0</gitflow-maven-plugin.version>
+<!--        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>-->
     </properties>
     <build>
         <pluginManagement>
