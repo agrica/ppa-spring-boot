@@ -71,7 +71,7 @@
         <compile.source>${java.version}</compile.source>
         <compile.target>${java.version}</compile.target>
         <!-- Assembly packaging configuration -->
-        <packaging.assembly.app.format>zip</packaging.assembly.app.format>
+        <packaging.assembly.app.format>tar.gz</packaging.assembly.app.format>
         <!-- Maven configuration -->
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
