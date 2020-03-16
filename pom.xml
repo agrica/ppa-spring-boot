@@ -133,7 +133,7 @@
         <!-- Changelog -->
         <ppa-changelog-assembly-descriptor.version>0.0.4</ppa-changelog-assembly-descriptor.version>
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.59</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.61</git-changelog-maven-plugin.version>
         <!-- Packaging -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <!-- OSS RH -->
