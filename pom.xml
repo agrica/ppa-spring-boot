@@ -560,46 +560,6 @@ Changelog of Git Changelog Maven plugin.
             </properties>
         </profile>
 
-        <!-- Docker Packaging : with Dockefile at root-->
-        <profile>
-            <id>docker</id>
-            <build>
-                <defaultGoal>docker:build</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>docker-maven-plugin</artifactId>
-                        <version>${docker-maven-plugin.fabric8.version}</version>
-                        <executions>
-                            <execution>
-                                <id>package-docker</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <images>
-                                <image>
-                                    <name>${dist.docker-registry.name}/${project.artifactId}</name>
-                                    <build>
-                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                        <filter>@</filter>
-                                        <optimise>true</optimise>
-                                        <tags>
-                                            <tag>latest</tag>
-                                            <tag>${project.version}</tag>
-                                        </tags>
-                                    </build>
-                                </image>
-                            </images>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <!-- To release to Maven central -->
         <profile>
             <id>ossrh-release</id>
