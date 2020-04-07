@@ -1,6 +1,9 @@
 #!/bin/bash -e
 
-VERSION=${1:-0.0.1-SNAPSHOT}
+VERSION=${1}
+ if [[ -z "${VERSION}" ]]; then
+    read -p "Version à releaser ? " VERSION
+  fi
 
 git co -b prepare-release
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
