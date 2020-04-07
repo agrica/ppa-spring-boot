@@ -176,7 +176,6 @@
                     <exclude>**/application*.yaml</exclude>
                     <exclude>**/application*.properties</exclude>
                     <exclude>**/logback*.xml</exclude>
-                    <exclude>**/*.*</exclude>
                 </excludes>
             </resource>
         </resources>
