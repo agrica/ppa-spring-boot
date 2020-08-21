@@ -16,6 +16,9 @@
     <version>2.1.6-SNAPSHOT</version>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
+    <description>POM Parent Agrica - Projets Spring Boot</description>
+    <url>https://github.com/agrica/ppa-springboot</url>
+        
     <organization>
         <name>Agrica</name>
         <url>https://www.groupagrica.com/</url>
@@ -32,7 +35,7 @@
             <name>Vincent Dupain</name>
         </developer>
         <developer>
-            <name>Jérôme Morille</name>
+            <name>JÃ©rÃ´me Morille</name>
         </developer>
     </developers>
     <inceptionYear>2019</inceptionYear>
