@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.13.RELEASE</version>
+        <version>2.1.17.RELEASE</version>
     </parent>
 
     <!-- Identification du projet -->
@@ -35,7 +35,7 @@
             <name>Vincent Dupain</name>
         </developer>
         <developer>
-            <name>JÃ©rÃ´me Morille</name>
+            <name>Jérôme Morille</name>
         </developer>
     </developers>
     <inceptionYear>2019</inceptionYear>
@@ -138,10 +138,10 @@
         <!-- Changelog -->
         <ppa-changelog-assembly-descriptor.version>0.0.4</ppa-changelog-assembly-descriptor.version>
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version> <!-- 1.13.7 -->
-        <git-changelog-maven-plugin.version>1.61</git-changelog-maven-plugin.version> <!-- v -->
+        <git-changelog-maven-plugin.version>1.62</git-changelog-maven-plugin.version> <!-- v -->
         <!-- Packaging -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
-        <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
         <!-- Docker: io.fabric8:docker-maven-plugin -->
         <docker-maven-plugin.fabric8.version>0.32.0</docker-maven-plugin.fabric8.version>
         <!-- OSS RH -->
