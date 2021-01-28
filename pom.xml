@@ -121,7 +121,7 @@
         <!-- Socle Spring Boot                 -->
         <!-- ================================= -->
 <!--        <socle-springboot.version>0.0.2-M5</socle-springboot.version>-->
-        <spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>Greenwich.SR6</spring-cloud-dependencies.version>
         <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
