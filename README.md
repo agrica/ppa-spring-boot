@@ -4,6 +4,10 @@
 * Repo Mondial: https://repo1.maven.org/maven2/io/github/agrica/ppa-spring-boot/
 
 ## Releasing du PPA
+```bash
+./ossrh-release.sh 2.4.x
+```
+Pour
  * Créer une branche **prepare-release** depuis la branche master. Cette branche est juste une branche temporaire de préparation à la release
  * Dans la branche **prepare-release** modifier le pom.xml et changer la version à releaser, par exemple: 1.0.0-rc0 (il ne devrait plus y avoir SNAPSHOT)
  * Le build CI sur la branche **prepare-release** va se déclencher
