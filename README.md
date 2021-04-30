@@ -6,6 +6,16 @@
 * Nexus Staging  https://oss.sonatype.org:443/
 * Repo Mondial: https://repo1.maven.org/maven2/io/github/agrica/ppa-spring-boot/
 
+    
+## Usage
+Dans le POM maven du projet héritez du PPA Agrica
+```xml
+  <parent>
+    <groupId>io.github.agrica</groupId>
+      <artifactId>ppa-spring-boot</artifactId>
+      <version>2.Y.Z</version>
+   </parent>
+```
 ## Releasing du PPA
 ```bash
 ./ossrh-release.sh 2.4.x
