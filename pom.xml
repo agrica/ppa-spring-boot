@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa-spring-boot</artifactId>
-    <version>2.4.3-SNAPSHOT</version>
+    <version>2.4.3</version>
 
     <name>POM Parent Agrica - Projets Spring Boot</name>
     <description>POM Parent Agrica - Projets Spring Boot</description>
@@ -569,12 +569,10 @@ Changelog of Git Changelog Maven plugin.
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
-                    <!-- url>https://oss.sonatype.org/content/repositories/snapshots</url -->
                     <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
                 <repository>
                     <id>ossrh</id>
-                    <!-- url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url -->
                     <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
