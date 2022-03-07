@@ -10,6 +10,7 @@ git co -b prepare-release
 
 echo "2- Set Maven Version $VERSION"
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+echo "  versions:set $VERSION  ==> exit code $?"
 mvn clean install
 git commit -am "Prepare Release version $VERSION"
 
