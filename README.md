@@ -2,7 +2,7 @@
 
 
 * Publication mondiale :https://central.sonatype.org/publish/publish-guide/
-* Travis CI: https://travis-ci.com/agrica/ppa-spring-boot
+* Travis CI: https://app.travis-ci.com/github/agrica/ppa-spring-boot
 * Nexus Staging  https://oss.sonatype.org:443/
 * Repo Mondial: https://repo1.maven.org/maven2/io/github/agrica/ppa-spring-boot/
 
