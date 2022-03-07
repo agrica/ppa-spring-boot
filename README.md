@@ -18,7 +18,7 @@ Dans le POM maven du projet héritez du PPA Agrica
 ```
 ## Releasing du PPA
 ```bash
-./ossrh-release.sh 2.4.x
+./ossrh-release.sh 2.6.x
 ```
 Pour
  * Créer une branche **prepare-release** depuis la branche master. Cette branche est juste une branche temporaire de préparation à la release
