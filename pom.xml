@@ -103,11 +103,11 @@
         <usine.url.ci.jenkins>http://jenkins.agrica.loc</usine.url.ci.jenkins>
         <!-- Sonar -->
         <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
-        <usine.url.sonar>http://sonar</usine.url.sonar>
+        <usine.url.sonar>http://sonar.agrica.loc</usine.url.sonar>
         <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project>
         <!-- TODO : more than one JIRA project ? -->
         <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
-        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+        <sonar.host.url>${usine.url.sonar}</sonar.host.url>
         <!-- ================================= -->
         <!-- Parametrage buildnumber           -->
         <!-- ================================= -->
