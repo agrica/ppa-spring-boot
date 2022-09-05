@@ -3,7 +3,7 @@
 VERSION=${1}
  if [[ -z "${VERSION}" ]]; then
     read -p "Version à releaser ? " VERSION
-  fi
+ fi
 
 echo "1- Create branch 'prepare-release'"
 git co -b prepare-release
