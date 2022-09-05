@@ -3,7 +3,7 @@
 VERSION=${1}
  if [[ -z "${VERSION}" ]]; then
     read -p "Version à releaser ? " VERSION
-  fi
+ fi
 
 git co -b prepare-release
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
