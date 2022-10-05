@@ -32,9 +32,6 @@
     </licenses>
     <developers>
         <developer>
-            <name>Vincent Dupain</name>
-        </developer>
-        <developer>
             <name>Jérôme Morille</name>
         </developer>
     </developers>
@@ -50,6 +47,12 @@
         </repository>
     </distributionManagement>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <url>${dist.repo.url}</url>
+        </pluginRepository>
+    </pluginRepositories>
     <!-- pre-requis -->
     <!-- Warnin:  uses prerequisites which is only intended for maven-plugin projects -->
     <!--    <prerequisites>-->
@@ -97,6 +100,7 @@
         <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
         <!--<build.date>${maven.build.timestamp}</build.date>-->
         <!-- Les URLs pour le deploiement des artifacts -->
+        <dist.repo.url>http://nexus.agrica.loc/repository/maven-ditw/</dist.repo.url>
         <dist.snapshots.url>http://nexus.agrica.loc/repository/maven-snapshots/</dist.snapshots.url>
         <dist.releases.url>http://nexus.agrica.loc/repository/maven-releases/</dist.releases.url>
         <dist.docker-registry.name>integ1:5000</dist.docker-registry.name>
@@ -109,7 +113,10 @@
         <usine.url.sonar>http://sonar.agrica.loc</usine.url.sonar>
         <jira-project>TO_BE_OVERRIDEN_BY_SPRING_BOOT_APP</jira-project>
         <!-- TODO : more than one JIRA project ? -->
-        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <!-- Sonar Analyser Config
+        <sonar.sources>${project.build.sourceDirectory}/**</sonar.sources>
+        <sonar.tests>${project.build.testSourceDirectory}/**</sonar.tests>
+        -->
         <sonar.host.url>${usine.url.sonar}</sonar.host.url>
         <!-- ================================= -->
         <!-- Parametrage buildnumber           -->
@@ -145,10 +152,16 @@
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version> <!-- 1.13.7 -->
 
         <git-changelog-maven-plugin.version>1.92</git-changelog-maven-plugin.version> <!-- v -->
+        <!-- Doc -->
+        <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.1</maven-project-info-reports-plugin.version>
+        <maven-surefire-report-plugin.version>2.22.2</maven-surefire-report-plugin.version>
+        <doxia-module-markdown.version>1.11.1</doxia-module-markdown.version>
+        <doxia-module-confluence.version>1.11.1</doxia-module-confluence.version>
+
         <!-- Packaging -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
-        <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
         <versions-maven-plugin.version>2.11.0</versions-maven-plugin.version>
 
         <!-- Docker: io.fabric8:docker-maven-plugin -->
@@ -538,6 +551,64 @@ Changelog of Git Changelog Maven plugin.
                     </execution>
                 </executions>
             </plugin>
+            <!-- Site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- Copy the readme file to the site source files so that a page is generated from it. -->
+                        <id>site-report-copy-readme</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-site/markdown</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}</directory>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+                <configuration>
+                    <locales>fr</locales>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia-module-markdown.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-confluence</artifactId>
+                        <version>${doxia-module-confluence.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>site-report-generate</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>site</goal>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GitFlow -->
             <plugin>
                 <groupId>com.amashchenko.maven.plugin</groupId>
                 <artifactId>gitflow-maven-plugin</artifactId>
@@ -567,6 +638,34 @@ Changelog of Git Changelog Maven plugin.
             </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <reportSets>
+                    <reportSet><!-- by default, id = "default" -->
+                        <reports><!-- select non-aggregate reports -->
+                            <report>javadoc</report>
+                            <report>test-javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-report-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
     <dependencyManagement>
         <dependencies>
             <dependency>
