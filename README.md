@@ -1,5 +1,4 @@
-# ppa-spring-boot [![Build Status](https://travis-ci.com/agrica/ppa-spring-boot.svg?branch=master)](https://travis-ci.com/agrica/ppa-spring-boot)
-
+# ppa-spring-boot
 
 * Publication mondiale :https://central.sonatype.org/publish/publish-guide/
 * Travis CI: https://app.travis-ci.com/github/agrica/ppa-spring-boot
