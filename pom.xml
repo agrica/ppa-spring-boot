@@ -135,7 +135,6 @@
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
         <maven-compiler-plugin.version>3.10.0</maven-compiler-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version> <!-- 3.1.1 -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version> <!-- 3.0.0-M1, 3.0.0-M4 -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
@@ -185,6 +184,7 @@
         <!-- ================================= -->
         <!-- Configuration                     -->
         <!-- ================================= -->
+        <site.package.skip>false</site.package.skip>
         <javadoc.skip>false</javadoc.skip>
     </properties>
     <build>
@@ -255,6 +255,21 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven-site-plugin.version}</version>
+                    <configuration>
+                        <locales>fr</locales>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-markdown</artifactId>
+                            <version>${doxia-module-markdown.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-confluence</artifactId>
+                            <version>${doxia-module-confluence.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <!-- Version -->
                 <plugin>
@@ -548,62 +563,9 @@ Changelog of Git Changelog Maven plugin.
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Site -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- Copy the readme file to the site source files so that a page is generated from it. -->
-                        <id>site-report-copy-readme</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/generated-site/markdown</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}</directory>
-                                    <includes>
-                                        <include>README.md</include>
-                                    </includes>
-                                </resource>
-                            </resources>
+                            <show>private</show>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${maven-site-plugin.version}</version>
-                <configuration>
-                    <locales>fr</locales>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia-module-markdown.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-confluence</artifactId>
-                        <version>${doxia-module-confluence.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>site-report-generate</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>site</goal>
-                            <goal>jar</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -650,6 +612,9 @@ Changelog of Git Changelog Maven plugin.
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <show>private</show>
+                </configuration>
                 <reportSets>
                     <reportSet><!-- by default, id = "default" -->
                         <reports><!-- select non-aggregate reports -->
@@ -692,6 +657,62 @@ Changelog of Git Changelog Maven plugin.
             </properties>
         </profile>
 
+        <!-- Site Package -->
+        <profile>
+            <id>site-package</id>
+            <activation>
+                <property>
+                    <name>site.package.skip</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Site -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>${maven-resources-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <!-- Copy the readme file to the site source files so that a page is generated from it. -->
+                                <id>site-report-copy-readme</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/generated-site/markdown</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>README.md</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>${maven-site-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>site-report-generate</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
         <!-- To release to Maven central -->
         <profile>
             <id>ossrh-release</id>
