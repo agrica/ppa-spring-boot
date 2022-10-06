@@ -662,8 +662,7 @@ Changelog of Git Changelog Maven plugin.
             <id>site-package</id>
             <activation>
                 <property>
-                    <name>site.package.skip</name>
-                    <value>false</value>
+                    <name>!site.package.skip</name>
                 </property>
             </activation>
             <build>
