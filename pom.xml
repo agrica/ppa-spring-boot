@@ -656,13 +656,25 @@ Changelog of Git Changelog Maven plugin.
                 <packaging.assembly.app.format>dir</packaging.assembly.app.format>
             </properties>
         </profile>
+        <profile>
+            <id>skipSite</id>
+            <activation>
+                <property>
+                    <name>skipSite</name>
+                </property>
+            </activation>
+            <properties>
+                <site.package.skip>true</site.package.skip>
+            </properties>
+        </profile>
 
         <!-- Site Package -->
         <profile>
             <id>site-package</id>
             <activation>
                 <property>
-                    <name>!site.package.skip</name>
+                    <name>site.package.skip</name>
+                    <value>!true</value>
                 </property>
             </activation>
             <build>
@@ -682,6 +694,7 @@ Changelog of Git Changelog Maven plugin.
                                 </goals>
                                 <configuration>
                                     <outputDirectory>${project.build.directory}/generated-site/markdown</outputDirectory>
+                                    <skip>${site.package.skip}</skip>
                                     <resources>
                                         <resource>
                                             <directory>${project.basedir}</directory>
@@ -705,6 +718,9 @@ Changelog of Git Changelog Maven plugin.
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
+                                <configuration>
+                                    <skip>${site.package.skip}</skip>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
