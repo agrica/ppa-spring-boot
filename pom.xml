@@ -150,7 +150,7 @@
         <ppa-changelog-assembly-descriptor.version>0.0.4</ppa-changelog-assembly-descriptor.version>
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version> <!-- 1.13.7 -->
 
-        <git-changelog-maven-plugin.version>1.92</git-changelog-maven-plugin.version> <!-- v -->
+        <git-changelog-maven-plugin.version>1.95.4</git-changelog-maven-plugin.version> <!-- v -->
         <!-- Doc -->
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.1</maven-project-info-reports-plugin.version>
