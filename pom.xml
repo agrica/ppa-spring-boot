@@ -215,6 +215,15 @@
                 <!-- ************************* -->
                 <!-- Tools                     -->
                 <!-- ************************ -->
+                <!-- Doc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <show>private</show>
+                    </configuration>
+                </plugin>
                 <!-- Release -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -556,6 +565,7 @@ Changelog of Git Changelog Maven plugin.
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <skip>${javadoc.skip}</skip>
+                    <show>private</show>
                 </configuration>
                 <executions>
                     <execution>
@@ -563,9 +573,6 @@ Changelog of Git Changelog Maven plugin.
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <show>private</show>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -619,7 +626,6 @@ Changelog of Git Changelog Maven plugin.
                     <reportSet><!-- by default, id = "default" -->
                         <reports><!-- select non-aggregate reports -->
                             <report>javadoc</report>
-                            <report>test-javadoc</report>
                         </reports>
                     </reportSet>
                 </reportSets>
@@ -667,7 +673,18 @@ Changelog of Git Changelog Maven plugin.
                 <site.package.skip>true</site.package.skip>
             </properties>
         </profile>
-
+        <profile>
+            <id>skipDoc</id>
+            <activation>
+                <property>
+                    <name>skipSite</name>
+                </property>
+            </activation>
+            <properties>
+                <site.package.skip>true</site.package.skip>
+                <javadoc.skip>true</javadoc.skip>
+            </properties>
+        </profile>
         <!-- Site Package -->
         <profile>
             <id>site-package</id>
@@ -778,6 +795,9 @@ Changelog of Git Changelog Maven plugin.
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>${maven-javadoc-plugin.version}</version>
+                        <configuration>
+                            <show>private</show>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
