@@ -25,7 +25,7 @@ pipeline {
         stage('Clean deploy') {
             steps {
                 script {
-                    withMaven(globalMavenSettingsConfig: 'maven-global-settings', mavenSettingsConfig: 'socle-maven-settings', jdk: 'OpenJDK 11.x', maven: 'Maven 3.x') { 
+                    withMaven(globalMavenSettingsConfig: 'maven-global-settings', mavenSettingsConfig: 'socle-maven-settings', jdk: 'OpenJDK 17.x', maven: 'Maven 3.x') {
                         sh "mvn clean deploy"
                     }
                 }
