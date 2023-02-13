@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-BRANCH_NAME="release/2.4.x"
+BRANCH_NAME="release/3.0.x"
 VERSION=${1}
  if [[ -z "${VERSION}" ]]; then
     read -p "Version à releaser ? " VERSION
