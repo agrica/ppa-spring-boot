@@ -32,7 +32,7 @@
     </licenses>
     <developers>
         <developer>
-            <name>Jérôme Morille</name>
+            <name>Jï¿½rï¿½me Morille</name>
         </developer>
     </developers>
     <inceptionYear>2019</inceptionYear>
@@ -62,10 +62,19 @@
         <system>JIRA</system>
         <url>${usine.url.bugtracker.jira}/${jira-project}</url>
     </issueManagement>
-    <scm>
+    
+     <!--<scm>
         <connection>scm:git:https://github.com/agrica/ppa-spring-boot.git</connection>
         <url>https://github.com/agrica/ppa-spring-boot</url>
+    </scm -->
+    <scm>
+        <connection>scm:git:ssh://gitlab-dei.agrica.loc:socle/ppa-spring-boot.git</connection>
+        <developerConnection>scm:git:git@gitlab-dei.agrica.loc:socle/ppa-spring-boot.git</developerConnection>
+        <url>http://gitlab-dei.agrica.loc/socle/ppa-spring-boot</url>
+        <tag>HEAD</tag>
     </scm>
+
+
     <properties>
         <!-- La version de maven -->
         <maven.version>3.5.0</maven.version>
