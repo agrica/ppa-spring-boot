@@ -30,7 +30,7 @@
     </licenses>
     <developers>
         <developer>
-            <name>J�r�me Morille</name>
+            <name>Jerome Morille</name>
         </developer>
     </developers>
     <inceptionYear>2019</inceptionYear>
@@ -188,9 +188,31 @@
         <ppa-assembly-descriptor.version>0.2.10</ppa-assembly-descriptor.version>
         <!-- Database -->
 <!--        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>-->
+        <!-- Security -->
+        <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
+        <!-- ================================= -->
+        <!--      Owasp Dependency Check       -->
+        <!-- ================================= -->
+        <dependency-check.nexus-server-id>nexus</dependency-check.nexus-server-id>
+        <!-- Report -->
+        <dependency-check.report-name>Dependency Check ${project.name} - ${project.version}</dependency-check.report-name>
+        <dependency-check.formats>ALL</dependency-check.formats>
+        <dependency-check.outputDirectory>${project.build.directory}/owasp-deps</dependency-check.outputDirectory>
+        <!-- Report sonar link -->
+        <sonar.dependencyCheck.reportPath>${dependency-check.outputDirectory}/dependency-check-report.xml</sonar.dependencyCheck.reportPath>
+        <sonar.dependencyCheck.jsonReportPath>${dependency-check.outputDirectory}/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
+        <sonar.dependencyCheck.htmlReportPath>${dependency-check.outputDirectory}/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
+        <!-- Analyser -->
+        <dependency-check.analyse.yarn>true</dependency-check.analyse.yarn>
+        <dependency-check.analyse.dotNET>false</dependency-check.analyse.dotNET>
+        <!-- Analyser Experimental -->
+        <dependency-check.analyse.experimental>true</dependency-check.analyse.experimental>
+        <dependency-check.analyse.composer>true</dependency-check.analyse.composer>
+
         <!-- ================================= -->
         <!-- Configuration                     -->
         <!-- ================================= -->
+        <!-- Doc -->
         <site.package.skip>false</site.package.skip>
         <javadoc.skip>false</javadoc.skip>
     </properties>
@@ -219,6 +241,29 @@
         <pluginManagement>
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
             <plugins>
+                <!-- ************************* -->
+                <!-- Security                     -->
+                <!-- ************************ -->
+                <!-- Dependency Check  -->
+                <!-- https://jeremylong.github.io/DependencyCheck/dependency-check-maven/configuration.html  -->
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>${dependency-check-maven.version}</version>
+                    <configuration>
+                        <outputDirectory>${dependency-check.outputDirectory}</outputDirectory>
+                        <nexusServerId>${dependency-check.nexus-server-id}</nexusServerId>
+                        <name>${dependency-check.report-name}</name>
+                        <formats>${dependency-check.formats}</formats>
+                        <!-- Analyser -->
+                        <!-- https://jeremylong.github.io/DependencyCheck/analyzers/index.html -->
+                        <assemblyAnalyzerEnabled>${dependency-check.analyse.dotNET}</assemblyAnalyzerEnabled>
+                        <yarnAuditAnalyzerEnabled>${dependency-check.analyse.yarn}</yarnAuditAnalyzerEnabled>
+                        <!-- Analyser Experimental -->
+                        <enableExperimental>${dependency-check.analyse.experimental}</enableExperimental>
+                        <composerAnalyzerEnabled>${dependency-check.analyse.composer}</composerAnalyzerEnabled>
+                    </configuration>
+                </plugin>
                 <!-- ************************* -->
                 <!-- Tools                     -->
                 <!-- ************************ -->
@@ -827,5 +872,34 @@ Changelog of Git Changelog Maven plugin.
                 </plugins>
             </build>
         </profile>
+
+
+
+        <profile>
+            <id>sonar-deps</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>${dependency-check-maven.version}</version>
+                        <executions>
+                            <execution>
+                                <id>run-dependency-check-maven</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <formats>${dependency-check.formats}</formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 </project>
