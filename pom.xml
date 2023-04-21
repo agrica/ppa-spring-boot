@@ -194,6 +194,8 @@
         <!--      Owasp Dependency Check       -->
         <!-- ================================= -->
         <dependency-check.nexus-server-id>nexus</dependency-check.nexus-server-id>
+        <dependency-check.autoUpdate>false</dependency-check.autoUpdate>
+        <dependency-check.cveValidForHours>4</dependency-check.cveValidForHours>
         <!-- Report -->
         <dependency-check.report-name>Dependency Check ${project.name} - ${project.version}</dependency-check.report-name>
         <dependency-check.formats>ALL</dependency-check.formats>
@@ -251,6 +253,11 @@
                     <artifactId>dependency-check-maven</artifactId>
                     <version>${dependency-check-maven.version}</version>
                     <configuration>
+                        <!-- Update Process -->
+                        <autoUpdate>${dependency-check.autoUpdate}</autoUpdate>
+                        <cveValidForHours>${dependency-check.cveValidForHours}</cveValidForHours>
+                        <outputDirectory>${dependency-check.outputDirectory}</outputDirectory>
+                        <!-- Config -->
                         <outputDirectory>${dependency-check.outputDirectory}</outputDirectory>
                         <nexusServerId>${dependency-check.nexus-server-id}</nexusServerId>
                         <name>${dependency-check.report-name}</name>
