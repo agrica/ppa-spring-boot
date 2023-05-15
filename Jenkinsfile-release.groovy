@@ -28,7 +28,7 @@ pipeline {
         stage('release') {
             steps {
                 script {
-                    withMaven(globalMavenSettingsConfig: 'maven-global-settings', mavenSettingsConfig: 'ditw-maven-settings', jdk: 'OpenJDK 11.x', maven: 'Maven 3.x') {
+                    withMaven(globalMavenSettingsConfig: 'maven-global-settings', mavenSettingsConfig: 'socle-maven-settings', jdk: 'OpenJDK 11.x', maven: 'Maven 3.x') {
                         sh "mvn -B gitflow:release-start gitflow:release-finish -DpostReleaseGoals=deploy -DreleaseVersion=${RELEASE_VERSION}"
                     }
                 }
