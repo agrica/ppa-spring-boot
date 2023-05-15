@@ -98,7 +98,6 @@
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
         <!-- Build Configuration-->
-        <jacoco-maven-plugin.excludes>**/model/**/*,**/model/*,**/models/**/*</jacoco-maven-plugin.excludes>
         <!-- Les options a passer a la commande forkee de maven pour les tests -->
         <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
         <!-- ================================= -->
