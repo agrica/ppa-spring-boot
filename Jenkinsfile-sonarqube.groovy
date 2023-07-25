@@ -32,7 +32,7 @@ pipeline {
                     withSonarQubeEnv('sonarqube') {
                         nodejs(nodeJSInstallationName: 'NodeJS 16.x', configId: 'config-npm') {
                             withMaven(globalMavenSettingsConfig: 'maven-global-settings', mavenSettingsConfig: 'socle-maven-settings', jdk: 'OpenJDK 11.x', maven: 'Maven 3.x', options: [artifactsPublisher(disabled: true)]) {
-                                  sh "mvn  -f pom.xml clean test -Psonar-deps -Dodc.plugins.scan=true  $SONARQUBE_SCANNER4MVN_GOAL"
+                                  sh "mvn  -f pom.xml clean test -Dodc.plugins.scan=true  $SONARQUBE_SCANNER4MVN_GOAL"
                             }
                         }
                     }
